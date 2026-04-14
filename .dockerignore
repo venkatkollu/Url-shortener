@@ -1,0 +1,12 @@
+.git
+.gitignore
+.idea
+*.iml
+.vscode
+build/
+.gradle/
+docs/
+jmeter/
+*.md
+docker-compose*.yml
+.dockerignore

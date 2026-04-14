@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>URL Shortener</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+  <div class="container">
+    <header>
+      <div class="logo-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/>
+          <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/>
+        </svg>
+      </div>
+      <h1>URL Shortener</h1>
+      <p class="subtitle">Fast, reliable short links with analytics</p>
+    </header>
+
+    <!-- Shorten Form -->
+    <section class="card card-primary" id="shorten-section">
+      <h2>
+        <span class="section-icon purple">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/>
+          </svg>
+        </span>
+        Shorten a URL
+      </h2>
+      <form id="shorten-form">
+        <div class="form-group">
+          <label for="url-input">Paste your long URL</label>
+          <input type="url" id="url-input" placeholder="https://example.com/very/long/path..." required>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="alias-input">Custom alias <span class="optional">(optional)</span></label>
+            <input type="text" id="alias-input" placeholder="my-link" pattern="[a-zA-Z0-9_-]{3,30}"
+                   title="3-30 characters: letters, numbers, hyphens, underscores">
+          </div>
+          <div class="form-group">
+            <label for="expiry-input">Expires in <span class="optional">(optional)</span></label>
+            <select id="expiry-input">
+              <option value="">Never</option>
+              <option value="60">1 hour</option>
+              <option value="1440">1 day</option>
+              <option value="10080">1 week</option>
+              <option value="43200">30 days</option>
+            </select>
+          </div>
+        </div>
+
+        <button type="submit" id="shorten-btn">Shorten URL</button>
+      </form>
+
+      <!-- Result -->
+      <div id="result" class="result hidden">
+        <div class="result-header">Ready</div>
+        <div class="result-url-row">
+          <a id="result-link" href="#" target="_blank" class="result-url"></a>
+          <button id="copy-btn" class="btn-copy" title="Copy to clipboard">Copy</button>
+        </div>
+        <div class="result-meta">
+          <span id="result-original" class="meta-item"></span>
+          <span id="result-expiry" class="meta-item"></span>
+        </div>
+      </div>
+
+      <div id="error-msg" class="error-msg hidden"></div>
+    </section>
+
+    <!-- Stats Lookup -->
+    <section class="card" id="stats-section">
+      <h2>
+        <span class="section-icon blue">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/>
+          </svg>
+        </span>
+        Link Statistics
+      </h2>
+      <form id="stats-form">
+        <div class="form-row">
+          <div class="form-group" style="flex:1">
+            <label for="stats-input">Enter short code or short URL</label>
+            <input type="text" id="stats-input" placeholder="google or http://localhost:8021/google" required>
+          </div>
+          <button type="submit" class="btn-stats">Lookup</button>
+        </div>
+      </form>
+
+      <div id="stats-result" class="stats-result hidden">
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-value" id="stat-clicks">0</div>
+            <div class="stat-label">Total Clicks</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-value" id="stat-created">-</div>
+            <div class="stat-label">Created</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-value" id="stat-expires">-</div>
+            <div class="stat-label">Expires</div>
+          </div>
+        </div>
+        <div class="stats-details">
+          <p><strong>Short URL:</strong> <a id="stat-short-url" href="#" target="_blank"></a></p>
+          <p><strong>Original:</strong> <span id="stat-original-url" class="break-word"></span></p>
+        </div>
+      </div>
+
+      <div id="stats-error" class="error-msg hidden"></div>
+    </section>
+
+    <footer>
+      <p>Built with</p>
+      <div class="tech-pills">
+        <span class="pill">Spring Boot</span>
+        <span class="pill">PostgreSQL</span>
+        <span class="pill">Redis</span>
+        <span class="pill">Docker</span>
+        <span class="pill">AWS</span>
+      </div>
+    </footer>
+  </div>
+
+  <script src="/js/app.js"></script>
+</body>
+</html>

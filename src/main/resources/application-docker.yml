@@ -1,0 +1,17 @@
+server:
+  # Inside the container Docker always uses 8080; host port is mapped in docker-compose (default 8021).
+  port: 8080
+
+spring:
+  datasource:
+    url: jdbc:postgresql://postgres:5432/urlshortener
+    username: ${POSTGRES_USER:postgres}
+    password: ${POSTGRES_PASSWORD:postgres}
+
+  data:
+    redis:
+      host: redis
+      port: 6379
+
+app:
+  base-url: ${APP_BASE_URL:http://localhost:8021}
